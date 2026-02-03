@@ -1,110 +1,134 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>Will You Be My Valentine? ❤️</title>
-  <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(135deg, #ff758c, #ff7eb3);
-      font-family: 'Segoe UI', sans-serif;
-      overflow: hidden;
-    }
+<meta charset="UTF-8">
+<title>For My Valentine ❤️</title>
 
-    .card {
-      background: white;
-      padding: 40px;
-      border-radius: 20px;
-      text-align: center;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-      max-width: 350px;
-      animation: pop 1s ease;
-    }
+<style>
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #ff758c, #ff7eb3);
+  font-family: Arial, sans-serif;
+}
 
-    h1 {
-      color: #ff4d6d;
-      margin-bottom: 10px;
-    }
+.card {
+  background: white;
+  padding: 25px;
+  border-radius: 20px;
+  text-align: center;
+  width: 360px;
+}
 
-    p {
-      color: #555;
-      font-size: 18px;
-    }
+h1 { color: #ff4d6d; }
 
-    .heart {
-      font-size: 60px;
-      animation: beat 1s infinite;
-      margin: 20px 0;
-    }
+.heart {
+  font-size: 50px;
+  animation: beat 1s infinite;
+}
 
-    button {
-      padding: 12px 25px;
-      font-size: 16px;
-      border: none;
-      border-radius: 30px;
-      cursor: pointer;
-      margin: 10px;
-      transition: transform 0.2s;
-    }
+@keyframes beat {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
 
-    .yes {
-      background: #ff4d6d;
-      color: white;
-    }
+.photos img {
+  width: 90px;
+  height: 90px;
+  border-radius: 12px;
+  margin: 5px;
+  object-fit: cover;
+}
 
-    .no {
-      background: #ddd;
-    }
+button {
+  padding: 10px 18px;
+  margin: 8px;
+  border: none;
+  border-radius: 20px;
+  font-size: 15px;
+  cursor: pointer;
+}
 
-    button:hover {
-      transform: scale(1.1);
-    }
+.yes { background: #ff4d6d; color: white; }
+.no  { background: #ddd; position: relative; }
+.play { background: #6c63ff; color: white; }
 
-    @keyframes beat {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.2); }
-    }
-
-    @keyframes pop {
-      from { transform: scale(0.7); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
-    }
-
-    .hidden {
-      display: none;
-    }
-  </style>
+input { margin: 8px 0; }
+</style>
 </head>
+
 <body>
 
-  <div class="card" id="card">
-    <h1>Hey Love ❤️</h1>
-    <p>I have something special to ask you...</p>
-    <div class="heart">💖</div>
-    <h2>Will you be my Valentine?</h2>
+<audio id="music" controls style="display:none;"></audio>
 
-    <button class="yes" onclick="yesClicked()">Yes 💕</button>
-    <button class="no" onclick="noClicked()">No 🙈</button>
-  </div>
+<div class="card" id="card">
 
-  <script>
-    function yesClicked() {
-      document.getElementById("card").innerHTML = `
-        <h1>Yayyyy!!! 💘</h1>
-        <p>You just made my heart the happiest ❤️</p>
-        <div class="heart">🥰</div>
-        <p>Happy Valentine’s Day!</p>
-      `;
-    }
+  <!-- ✏️ PERSONALIZED TEXT -->
+  <h1>Hey My Love ❤️</h1>
+  <p>
+    From random talks to endless smiles,<br>
+    from small moments to big memories,<br>
+    you’ve become my favourite part of every day 🥰
+  </p>
 
-    function noClicked() {
-      alert("Wrong button 😌 Try again ❤️");
-    }
-  </script>
+  <div class="heart">💖</div>
+
+  <!-- 🎵 YOUR SONG (SAFE METHOD) -->
+  <p><b>Select our song 🎶</b></p>
+  <input type="file" accept="audio/*" onchange="loadMusic(this)"><br>
+  <button class="play" onclick="playMusic()">▶ Play Music</button>
+
+  <!-- 📸 YOUR PHOTOS (SAFE METHOD) -->
+  <p><b>Select our photos 📸</b></p>
+  <input type="file" accept="image/*" multiple onchange="loadPhotos(this)">
+
+  <div class="photos" id="photos"></div>
+
+  <h3>Will you be my Valentine? 💌</h3>
+
+  <button class="yes" onclick="yesClick()">Yes 💕</button>
+  <button class="no" id="noBtn" onmouseover="moveNo()">No 🙈</button>
+</div>
+
+<script>
+function loadMusic(input) {
+  var music = document.getElementById("music");
+  music.src = URL.createObjectURL(input.files[0]);
+}
+
+function playMusic() {
+  document.getElementById("music").play();
+}
+
+function loadPhotos(input) {
+  var container = document.getElementById("photos");
+  container.innerHTML = "";
+  for (var i = 0; i < input.files.length && i < 3; i++) {
+    var img = document.createElement("img");
+    img.src = URL.createObjectURL(input.files[i]);
+    container.appendChild(img);
+  }
+}
+
+function yesClick() {
+  document.getElementById("card").innerHTML =
+    "<h1>Yayyy 💘</h1>" +
+    "<p>You just made my heart so happy ❤️<br>" +
+    "I can’t wait to make this Valentine’s Day special with you 🥰</p>" +
+    "<div class='heart'>😍</div>";
+}
+
+function moveNo() {
+  var btn = document.getElementById("noBtn");
+  var x = Math.floor(Math.random() * 160) - 80;
+  var y = Math.floor(Math.random() * 160) - 80;
+  btn.style.transform = "translate(" + x + "px," + y + "px)";
+}
+</script>
 
 </body>
 </html>
