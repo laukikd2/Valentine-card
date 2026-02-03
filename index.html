@@ -55,38 +55,32 @@ button {
 
 .yes { background: #ff4d6d; color: white; }
 .no  { background: #ddd; position: relative; }
-.play { background: #6c63ff; color: white; }
-
-input { margin: 8px 0; }
 </style>
 </head>
 
 <body>
 
-<audio id="music" controls style="display:none;"></audio>
+<audio id="music" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
 
 <div class="card" id="card">
 
-  <!-- ✏️ PERSONALIZED TEXT -->
-  <h1>Hey My Love ❤️</h1>
+  <!-- Personalized message -->
+  <h1>Hey [Her Name] ❤️</h1>
   <p>
-    From random talks to endless smiles,<br>
-    from small moments to big memories,<br>
-    you’ve become my favourite part of every day 🥰
+    From the first time we met to every laugh and smile,<br>
+    you’ve become my favorite part of every day 🥰
   </p>
 
   <div class="heart">💖</div>
 
-  <!-- 🎵 YOUR SONG (SAFE METHOD) -->
-  <p><b>Select our song 🎶</b></p>
-  <input type="file" accept="audio/*" onchange="loadMusic(this)"><br>
-  <button class="play" onclick="playMusic()">▶ Play Music</button>
-
-  <!-- 📸 YOUR PHOTOS (SAFE METHOD) -->
-  <p><b>Select our photos 📸</b></p>
-  <input type="file" accept="image/*" multiple onchange="loadPhotos(this)">
-
-  <div class="photos" id="photos"></div>
+  <!-- Photos -->
+  <div class="photos">
+    <img src="photo1.jpg" alt="Photo 1">
+    <img src="photo2.jpg" alt="Photo 2">
+    <img src="photo3.jpg" alt="Photo 3">
+  </div>
 
   <h3>Will you be my Valentine? 💌</h3>
 
@@ -95,26 +89,10 @@ input { margin: 8px 0; }
 </div>
 
 <script>
-function loadMusic(input) {
-  var music = document.getElementById("music");
-  music.src = URL.createObjectURL(input.files[0]);
-}
-
-function playMusic() {
-  document.getElementById("music").play();
-}
-
-function loadPhotos(input) {
-  var container = document.getElementById("photos");
-  container.innerHTML = "";
-  for (var i = 0; i < input.files.length && i < 3; i++) {
-    var img = document.createElement("img");
-    img.src = URL.createObjectURL(input.files[i]);
-    container.appendChild(img);
-  }
-}
-
 function yesClick() {
+  var music = document.getElementById("music");
+  music.play();
+
   document.getElementById("card").innerHTML =
     "<h1>Yayyy 💘</h1>" +
     "<p>You just made my heart so happy ❤️<br>" +
@@ -132,3 +110,4 @@ function moveNo() {
 
 </body>
 </html>
+
