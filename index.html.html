@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Will You Be My Valentine? ❤️</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #ff758c, #ff7eb3);
+      font-family: 'Segoe UI', sans-serif;
+      overflow: hidden;
+    }
+
+    .card {
+      background: white;
+      padding: 40px;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+      max-width: 350px;
+      animation: pop 1s ease;
+    }
+
+    h1 {
+      color: #ff4d6d;
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: #555;
+      font-size: 18px;
+    }
+
+    .heart {
+      font-size: 60px;
+      animation: beat 1s infinite;
+      margin: 20px 0;
+    }
+
+    button {
+      padding: 12px 25px;
+      font-size: 16px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      margin: 10px;
+      transition: transform 0.2s;
+    }
+
+    .yes {
+      background: #ff4d6d;
+      color: white;
+    }
+
+    .no {
+      background: #ddd;
+    }
+
+    button:hover {
+      transform: scale(1.1);
+    }
+
+    @keyframes beat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+    }
+
+    @keyframes pop {
+      from { transform: scale(0.7); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card" id="card">
+    <h1>Hey Love ❤️</h1>
+    <p>I have something special to ask you...</p>
+    <div class="heart">💖</div>
+    <h2>Will you be my Valentine?</h2>
+
+    <button class="yes" onclick="yesClicked()">Yes 💕</button>
+    <button class="no" onclick="noClicked()">No 🙈</button>
+  </div>
+
+  <script>
+    function yesClicked() {
+      document.getElementById("card").innerHTML = `
+        <h1>Yayyyy!!! 💘</h1>
+        <p>You just made my heart the happiest ❤️</p>
+        <div class="heart">🥰</div>
+        <p>Happy Valentine’s Day!</p>
+      `;
+    }
+
+    function noClicked() {
+      alert("Wrong button 😌 Try again ❤️");
+    }
+  </script>
+
+</body>
+</html>
